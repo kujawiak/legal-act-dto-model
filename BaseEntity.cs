@@ -55,13 +55,17 @@ namespace ModelDto
         /// </summary>
         public EntityNumber? Number { get; set; }
 
+        //TODO: ContentText to tekst jednostki redakcyjnej. Tymczasowo jest to string, ale trzeba uwzgędnić:
+        // - możliwość występowania elementów osadzonych, jak tabele, grafiki, wzory matematyczne itp.
+        // - obecnie konwertujemy wszystko do tekstu płaskiego, ale w przyszłości będzie potrzebny model drzewa, 
+        //  dzieląc na poszczególne akapity (zdania)
+        // Do rozważenia - Content trzymać w formie HTML z formatowaniem?
         public string ContentText { get; set; } = string.Empty;
 
         /// <summary>
         /// Data wejścia w życie danej jednostki redakcyjnej.
         /// </summary>
         public DateTime EffectiveDate { get; set; }
-        public LegalReference? LegalReference { get; set; }
         
         /// <summary>
         /// Komunikaty walidacji/diagnostyki zestawiane podczas parsowania
@@ -77,11 +81,6 @@ namespace ModelDto
         public Letter? Letter { get; set; }
         public Tiret? Tiret { get; set; }
 
-        //TODO: Context to tekst jednostki redakcyjnej. Tymczasowo jest to string, ale trzeba uwzgędnić:
-        // - możliwość występowania elementów osadzonych, jak tabele, grafiki, wzory matematyczne itp.
-        // - obecnie konwertujemy wszystko do tekstu płaskiego, ale w przyszłości będzie potrzebny model drzewa, 
-        //  dzieląc na poszczególne akapity (zdania)
-        public string Context { get; set; } = string.Empty;
         /// <summary>
         /// Lokalny segment identyfikatora (np. "art_10" albo "lit_a").
         /// Można nadpisać w klasach pochodnych, gdy format różni się.
