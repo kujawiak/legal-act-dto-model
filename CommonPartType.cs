@@ -1,18 +1,25 @@
 namespace ModelDto
 {
     /// <summary>
-    /// Typ części wspólnej (wirtualnego bytu reprezentującego intro lub wrapUp jednostki nadrzędnej).
+    /// Typ części wspólnej (wirtualnego bytu reprezentującego intro lub wrapUp jednostki wyliczeniowej).
+    /// 
+    /// CommonPart Intro: tekst przed wyliczeniem (np. "Następujące przepisy uchyla się:" przed listą punktów)
+    /// CommonPart WrapUp: tekst po wyliczeniu (np. tekst wspólny dla wszystkich wariantów po liście tiretów)
+    /// 
     /// Służy do adresowania fragmentów tekstu przed i po liście w modelu redakcyjnym.
+    /// Może się pojawić tylko w jednostkach wyliczeniowych (Point, Letter).
     /// </summary>
     public enum CommonPartType
     {
         /// <summary>
-        /// Część wspólna przed listą (np. "Poniższe przepisy uchyla się:")
+        /// Wprowadzenie do wyliczenia - tekst przed listą (litery, tirety, itp.)
+        /// Przykład: "Gdzie:" (przed listą warunków)
         /// </summary>
         Intro,
 
         /// <summary>
-        /// Część wspólna po liście (np. "Szczegółowe warunki zawarte w rozporządzeniu")
+        /// Część wspólna po wyliczeniu - tekst wspólny dla wszystkich wariantów
+        /// Przykład: "Szczegółowe warunki zawarte w rozporządzeniu" (po liście tiretów)
         /// </summary>
         WrapUp
     }

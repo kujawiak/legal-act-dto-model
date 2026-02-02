@@ -6,7 +6,16 @@ namespace ModelDto
 {
     /// <summary>
     /// Część wspólna (intro/wrapUp) - wirtualna jednostka redakcyjna reprezentująca
-    /// tekst przed listą (intro) lub po liście (wrapUp) jednostki nadrzędnej.
+    /// tekst przed i/lub po zawartości (intro) lub po zawartości (wrapUp) jednostki wyliczeniowej.
+    /// 
+    /// CommonPart może być TYLKO dzieckiem jednostek wyliczeniowych:
+    /// - Point: CommonPartIntro (przed literami) / CommonPartWrapUp (po literach)
+    /// - Letter: CommonPartIntro (przed tiretami) / CommonPartWrapUp (po tiretach)
+    /// - Tiret: CommonPartIntro (przed tekstem) / CommonPartWrapUp (po tekście)
+    /// 
+    /// CommonPart NIE może być w:
+    /// - Article (brak CommonParts na poziomie artykułu)
+    /// - Paragraph (brak CommonParts na poziomie ustępu)
     /// 
     /// Nie jest jednostką prawa w tradycyjnym sensie, lecz adresowalnym fragmentem
     /// w systemie redakcyjnym i w modelu zmian legislacyjnych.
@@ -17,10 +26,15 @@ namespace ModelDto
     /// Przykład hierarchii:
     ///   Article (art_5)
     ///     └─ Paragraph (art_5__ust_1)
-    ///         ├─ CommonPart Intro (art_5__ust_1__intro)
-    ///         ├─ Point (art_5__ust_1__pkt_1)
-    ///         ├─ Point (art_5__ust_1__pkt_2)
-    ///         └─ CommonPart WrapUp (art_5__ust_1__wrapUp)
+    ///         └─ Point (art_5__ust_1__pkt_1)
+    ///             ├─ CommonPart Intro (art_5__ust_1__pkt_1__intro)
+    ///             ├─ Letter (art_5__ust_1__pkt_1__lit_a)
+    ///             │   ├─ CommonPart Intro (art_5__ust_1__pkt_1__lit_a__intro)
+    ///             │   ├─ Tiret (art_5__ust_1__pkt_1__lit_a__tir_1)
+    ///             │   │   ├─ CommonPart Intro (art_5__ust_1__pkt_1__lit_a__tir_1__intro)
+    ///             │   │   └─ CommonPart WrapUp (art_5__ust_1__pkt_1__lit_a__tir_1__wrapUp)
+    ///             │   └─ CommonPart WrapUp (art_5__ust_1__pkt_1__lit_a__wrapUp)
+    ///             └─ CommonPart WrapUp (art_5__ust_1__pkt_1__wrapUp)
     /// </summary>
     public class CommonPart : BaseEntity
     {
