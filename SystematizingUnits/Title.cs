@@ -5,8 +5,13 @@ namespace ModelDto.SystematizingUnits
     /// <summary>
     /// Jednostka systematyzująca: tytuł
     /// </summary>
-    public class Title : BaseEntity
+    public class Title : BaseEntity, ISystematizingUnit
     {
+        /// <summary>
+        /// Tytuł sekcji (np. "Podmioty prawa cywilnego", "Spadki")
+        /// </summary>
+        public string Heading { get; set; } = string.Empty;
+
         public Title()
         {
             UnitType = UnitType.Title;
