@@ -10,14 +10,14 @@ namespace ModelDto.SystematizingUnits
     /// 
     /// Przykłady: Część, Księga, Tytuł, Dział, Rozdział, Podrozdział.
     /// 
-    /// Uwaga: Rozdział (Chapter) jest OBLIGATORYJNY - każdy akt prawny zawiera co najmniej
-    /// jeden rozdział (domyślny/ukryty z IsImplicit=true, gdy nie występuje jawnie w tekście).
-    /// Pozostałe jednostki systematyzujące są opcjonalne.
+    /// Uwaga: Każdy akt zawiera pełną minimalną hierarchię jednostek systematyzujących,
+    /// a jednostki nieobecne w tekście są oznaczane jako IsImplicit = true.
     /// 
     /// Każda jednostka systematyzująca ma:
     /// - Heading: krótki tytuł opisujący zakres tematyczny (np. "Przepisy ogólne", "Odpowiedzialność karna")
     /// - Number: numer jednostki (np. "I", "II", "1", "2")
-    /// - Hierarchię: może zawierać inne jednostki systematyzujące lub jednostki redakcyjne
+    /// - IsImplicit: czy jednostka jest domyślna/niejawna (nie występuje w tekście)
+    /// - Hierarchię: zawiera inne jednostki systematyzujące (najniżej: oddział z artykułami)
     /// </summary>
     public interface ISystematizingUnit
     {
@@ -26,5 +26,10 @@ namespace ModelDto.SystematizingUnits
         /// Przykłady: "Przepisy ogólne", "Odpowiedzialność karna", "Postępowanie administracyjne".
         /// </summary>
         string Heading { get; set; }
+
+        /// <summary>
+        /// Czy jednostka jest domyślna/ukryta (niejawna w dokumencie).
+        /// </summary>
+        bool IsImplicit { get; set; }
     }
 }

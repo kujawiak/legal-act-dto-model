@@ -12,6 +12,11 @@ namespace ModelDto.SystematizingUnits
         /// </summary>
         public string Heading { get; set; } = string.Empty;
 
+        /// <summary>
+        /// Czy tytuł jest domyślny/ukryty (niejawny w dokumencie).
+        /// </summary>
+        public bool IsImplicit { get; set; } = true;
+
         public Title()
         {
             UnitType = UnitType.Title;

@@ -12,6 +12,11 @@ namespace ModelDto.SystematizingUnits
         /// </summary>
         public string Heading { get; set; } = string.Empty;
 
+        /// <summary>
+        /// Czy księga jest domyślna/ukryta (niejawna w dokumencie).
+        /// </summary>
+        public bool IsImplicit { get; set; } = true;
+
         public Book()
         {
             UnitType = UnitType.Book;

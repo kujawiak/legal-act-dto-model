@@ -10,10 +10,10 @@ namespace ModelDto
     /// Model aktu prawnego - wrapper całej struktury dokumentu legislacyjnego.
     /// 
     /// Zawiera metadane dotyczące całego aktu oraz hierarchię jego struktury.
-    /// Każdy akt zawiera co najmniej jeden rozdział (Chapter) gdzieś w drzewie,
-    /// ale może się pojawić na różnych poziomach zależnie od struktury.
+    /// W konstruktorze tworzona jest minimalna pełna hierarchia od części do oddziału,
+    /// a jednostki nieobecne w tekście pozostają jako IsImplicit = true.
     /// 
-    /// Przykładowa pełna hierarchia (różne akty mogą mieć części tej hierarchii):
+    /// Przykładowa pełna hierarchia:
     /// Część (Part) → Księga (Book) → Tytuł (Title) → Dział (Division) → 
     /// Rozdział (Chapter) → Oddział (Subchapter) → Artykuł (Article)
     /// 
@@ -22,17 +22,30 @@ namespace ModelDto
     ///   ├─ Type: Statute/Regulation/Code (determinuje nazewnictwo jednostek)
     ///   ├─ Title: "Ustawa o ochronie pracy"
     ///   ├─ SourceJournal: DzU 2024, poz. 123
-    ///   └─ RootSystematizingUnits[]: pierwsze jednostki systematyzujące (mogą być Part, Book, Title, Division, itd.)
-    ///       └─ ... (kolejne poziomy Part/Book/Title/Division)
-    ///           └─ Chapter (obowiązkowa co najmniej raz w drzewie, zwykle ostatnia systematyzująca)
-    ///               ├─ Subchapters (Oddziały): jeśli istnieją
-    ///               │   └─ Articles[]: artykuły w oddziale
-    ///               │       └─ Subsections: ustępy
-    ///               └─ Articles[]: artykuły bezpośrednio w rozdziale (gdy brak Oddziałów)
-    ///                   └─ Subsections: ustępy
+    ///   └─ RootSystematizingUnits[]: zawsze zawiera Part (domyślną lub jawną)
+    ///       └─ Book → Title → Division → Chapter → Subchapter
+    ///           └─ Articles[]: artykuły w oddziale
+    ///               └─ Subsections: ustępy
     /// </summary>
     public class LegalDocument
     {
+        public LegalDocument()
+        {
+            var part = new Part { IsImplicit = true };
+            var book = new Book { IsImplicit = true, Parent = part };
+            var title = new Title { IsImplicit = true, Parent = book };
+            var division = new Division { IsImplicit = true, Parent = title };
+            var chapter = new Chapter { IsImplicit = true, Parent = division };
+            var subchapter = new Subchapter { IsImplicit = true, Parent = chapter };
+
+            chapter.Subchapters.Add(subchapter);
+            division.Chapters.Add(chapter);
+            title.Divisions.Add(division);
+            book.Titles.Add(title);
+            part.Books.Add(book);
+
+            RootSystematizingUnits.Add(part);
+        }
         /// <summary>
         /// Unikalny identyfikator dokumentu.
         /// </summary>
@@ -58,14 +71,8 @@ namespace ModelDto
 
         /// <summary>
         /// Pierwsze (najwyższe) jednostki systematyzujące w akcie.
-        /// Przykłady:
-        /// - Kodeks: Księga → Tytuł → Oddział → Rozdział → Artykuły
-        /// - Ustawa: Rozdział → Artykuły (lub Rozdział domyślny, gdy brak jawnych rozdziałów)
-        /// - Rozporządzenie: Rozdział → Artykuły (§)
-        /// 
-        /// W całym drzewie jednostek MUSI wystąpić co najmniej jeden rozdział.
-        /// Jeśli dokument nie zawiera jawnych rozdziałów, należy dodać domyślny
-        /// Chapter z IsImplicit = true i umieścić w nim wszystkie artykuły.
+        /// Zawsze zawiera minimalną pełną hierarchię od Części do Oddziału.
+        /// Parser oznacza jednostki obecne w tekście jako IsImplicit = false.
         /// </summary>
         public List<ISystematizingUnit> RootSystematizingUnits { get; set; } = new();
 
