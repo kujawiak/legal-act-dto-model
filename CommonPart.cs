@@ -50,6 +50,12 @@ namespace ModelDto
         /// </summary>
         public string ParentEId { get; set; } = string.Empty;
 
+        /// <summary>
+        /// Opcjonalne powiązanie z segmentem tekstu (np. zdaniem) w jednostce nadrzędnej.
+        /// Pozwala wskazać, które zdanie pełni rolę intro/wrapUp.
+        /// </summary>
+        public int? SourceSegmentOrder { get; set; }
+
         public CommonPart()
         {
             UnitType = UnitType.CommonPart;
@@ -59,11 +65,12 @@ namespace ModelDto
         /// <summary>
         /// Konstruktor z parametrami.
         /// </summary>
-        public CommonPart(CommonPartType type, string parentEId, string contentText) : this()
+        public CommonPart(CommonPartType type, string parentEId, string contentText, int? sourceSegmentOrder = null) : this()
         {
             Type = type;
             ParentEId = parentEId;
             ContentText = contentText;
+            SourceSegmentOrder = sourceSegmentOrder;
             EIdPrefix = type.ToEIdSegment();
         }
 
