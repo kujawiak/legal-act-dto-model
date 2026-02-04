@@ -11,7 +11,6 @@ namespace ModelDto
     {
         public List<Paragraph> Paragraphs { get; set; } = new();
         public List<JournalInfo> Journals { get; set; } = new();
-        public List<string> AllAmendments { get; set; } = new();
 
         public bool IsAmending => Journals.Count > 0;
 
