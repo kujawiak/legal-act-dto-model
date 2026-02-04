@@ -44,7 +44,7 @@ namespace ModelDto
             book.Titles.Add(title);
             part.Books.Add(book);
 
-            RootSystematizingUnits.Add(part);
+            RootPart = part;
         }
         /// <summary>
         /// Unikalny identyfikator dokumentu.
@@ -70,11 +70,26 @@ namespace ModelDto
         public JournalInfo SourceJournal { get; set; } = new();
 
         /// <summary>
-        /// Pierwsze (najwyższe) jednostki systematyzujące w akcie.
+        /// Pierwsza (najwyższa) jednostka systematyzująca w akcie (Część).
         /// Zawsze zawiera minimalną pełną hierarchię od Części do Oddziału.
         /// Parser oznacza jednostki obecne w tekście jako IsImplicit = false.
         /// </summary>
-        public List<ISystematizingUnit> RootSystematizingUnits { get; set; } = new();
+        public Part RootPart { get; set; } = new();
+
+        /// <summary>
+        /// Skrót do wszystkich artykułów w dokumencie (niezależnie od hierarchii).
+        /// Przydatne do nawigacji i przeglądania treści.
+        /// </summary>
+        public IEnumerable<Article> Articles
+        {
+            get
+            {
+                foreach (var article in EnumerateArticlesFromUnit(RootPart))
+                {
+                    yield return article;
+                }
+            }
+        }
 
         /// <summary>
         /// Data utworzenia dokumentu w systemie.
@@ -101,6 +116,42 @@ namespace ModelDto
         public override string ToString()
         {
             return $"{Type.ToFriendlyString().ToUpper()}: {Title} ({SourceJournal})";
+        }
+
+        private static IEnumerable<Article> EnumerateArticlesFromUnit(ISystematizingUnit unit)
+        {
+            switch (unit)
+            {
+                case Part part:
+                    foreach (var book in part.Books)
+                    foreach (var article in EnumerateArticlesFromUnit(book))
+                        yield return article;
+                    break;
+                case Book book:
+                    foreach (var title in book.Titles)
+                    foreach (var article in EnumerateArticlesFromUnit(title))
+                        yield return article;
+                    break;
+                case Title title:
+                    foreach (var division in title.Divisions)
+                    foreach (var article in EnumerateArticlesFromUnit(division))
+                        yield return article;
+                    break;
+                case Division division:
+                    foreach (var chapter in division.Chapters)
+                    foreach (var article in EnumerateArticlesFromUnit(chapter))
+                        yield return article;
+                    break;
+                case Chapter chapter:
+                    foreach (var subchapter in chapter.Subchapters)
+                    foreach (var article in EnumerateArticlesFromUnit(subchapter))
+                        yield return article;
+                    break;
+                case Subchapter subchapter:
+                    foreach (var article in subchapter.Articles)
+                        yield return article;
+                    break;
+            }
         }
     }
 }
