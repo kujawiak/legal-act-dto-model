@@ -7,22 +7,29 @@ using ModelDto.SystematizingUnits;
 namespace ModelDto
 {
     /// <summary>
-    /// Model aktu prawnego - wrappper całej struktury dokumentu legislacyjnego.
+    /// Model aktu prawnego - wrapper całej struktury dokumentu legislacyjnego.
     /// 
     /// Zawiera metadane dotyczące całego aktu oraz hierarchię jego struktury.
-    /// Każdy akt zawiera co najmniej jeden rozdział (Chapter), ale rozdział może
-    /// występować na niższym poziomie (np. Księga → Tytuł → Oddział → Rozdział).
+    /// Każdy akt zawiera co najmniej jeden rozdział (Chapter) gdzieś w drzewie,
+    /// ale może się pojawić na różnych poziomach zależnie od struktury.
     /// 
-    /// Struktura:
+    /// Przykładowa pełna hierarchia (różne akty mogą mieć części tej hierarchii):
+    /// Część (Part) → Księga (Book) → Tytuł (Title) → Dział (Division) → 
+    /// Rozdział (Chapter) → Oddział (Subchapter) → Artykuł (Article)
+    /// 
+    /// Struktura w LegalDocument:
     /// LegalDocument
-    ///   ├─ Type: Statute/Regulation/Code
+    ///   ├─ Type: Statute/Regulation/Code (determinuje nazewnictwo jednostek)
     ///   ├─ Title: "Ustawa o ochronie pracy"
     ///   ├─ SourceJournal: DzU 2024, poz. 123
-    ///   └─ RootSystematizingUnits[]: pierwsze jednostki systematyzujące
-    ///       └─ ... (kolejne poziomy systematyzujące)
-    ///           └─ Chapter (obowiązkowa, co najmniej jedna w całym drzewie)
-    ///               └─ Articles[]: artykuły w rozdziale
-    ///                   └─ Paragraphs: ustępy lub paragrafy (w zależności od typu aktu)
+    ///   └─ RootSystematizingUnits[]: pierwsze jednostki systematyzujące (mogą być Part, Book, Title, Division, itd.)
+    ///       └─ ... (kolejne poziomy Part/Book/Title/Division)
+    ///           └─ Chapter (obowiązkowa co najmniej raz w drzewie, zwykle ostatnia systematyzująca)
+    ///               ├─ Subchapters (Oddziały): jeśli istnieją
+    ///               │   └─ Articles[]: artykuły w oddziale
+    ///               │       └─ Subsections: ustępy
+    ///               └─ Articles[]: artykuły bezpośrednio w rozdziale (gdy brak Oddziałów)
+    ///                   └─ Subsections: ustępy
     /// </summary>
     public class LegalDocument
     {

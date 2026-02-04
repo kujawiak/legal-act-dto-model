@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using ModelDto;
 
 namespace ModelDto.SystematizingUnits
 {
@@ -39,6 +40,17 @@ namespace ModelDto.SystematizingUnits
             DisplayLabel = "rozd.";
         }
 
-        public List<Subchapter> Sections { get; set; } = new();
+        /// <summary>
+        /// Oddział (Subchapter) — opcjonalny poziom organizacji poniżej Rozdziału.
+        /// Jeśli Oddział nie istnieje, artykuły idą bezpośrednio do właściwości Articles.
+        /// </summary>
+        public List<Subchapter> Subchapters { get; set; } = new();
+
+        /// <summary>
+        /// Artykuły zawarte bezpośrednio w tym Rozdziale (gdy brak Oddziałów).
+        /// W modelu hierarchicznym: jeśli Sections nie jest puste, artykuły są tam;
+        /// jeśli Sections jest puste, artykuły są tutaj.
+        /// </summary>
+        public List<Article> Articles { get; set; } = new();
     }
 }

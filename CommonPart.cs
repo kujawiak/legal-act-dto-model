@@ -21,7 +21,7 @@ namespace ModelDto
     /// w systemie redakcyjnym i w modelu zmian legislacyjnych.
     /// 
     /// W publikacyjnym XML (AKN/ELI) CommonPart nie pojawia się jawnie - jego zawartość
-    /// trafia bezpośrednio do elementów &lt;intro&gt; lub &lt;wrapUp&gt;.
+    /// trafia bezpośrednio do elementów intro lub wrapUp.
     /// 
     /// Przykład hierarchii:
     ///   Article (art_5)
