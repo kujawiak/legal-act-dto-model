@@ -6,16 +6,17 @@ namespace ModelDto
 {
     /// <summary>
     /// Część wspólna (intro/wrapUp) - wirtualna jednostka redakcyjna reprezentująca
-    /// tekst przed i/lub po zawartości (intro) lub po zawartości (wrapUp) jednostki wyliczeniowej.
+    /// tekst występujący przed listą elementów wyliczeniowych lub po niej.
     /// 
-    /// CommonPart może być TYLKO dzieckiem jednostek wyliczeniowych:
-    /// - Point: CommonPartIntro (przed literami) / CommonPartWrapUp (po literach)
-    /// - Letter: CommonPartIntro (przed tiretami) / CommonPartWrapUp (po tiretach)
-    /// - Tiret: CommonPartIntro (przed tekstem) / CommonPartWrapUp (po tekście)
+    /// CommonPart jest na tym samym poziomie hierarchii co elementy wyliczeniowe,
+    /// których dotyczy (np. rodzeństwo punktów, liter, tiretów).
     /// 
-    /// CommonPart NIE może być w:
-    /// - Article (brak CommonParts na poziomie artykułu)
-    /// - Paragraph (brak CommonParts na poziomie ustępu)
+    /// Typowe poziomy występowania:
+    /// - Paragraph: CommonParts (wobec listy punktów)
+    /// - Point: CommonParts (wobec listy liter)
+    /// - Letter: CommonParts (wobec listy tiretów)
+    /// 
+    /// CommonPart NIE występuje w Article jako bezpośrednie dziecko.
     /// 
     /// Nie jest jednostką prawa w tradycyjnym sensie, lecz adresowalnym fragmentem
     /// w systemie redakcyjnym i w modelu zmian legislacyjnych.
@@ -26,15 +27,15 @@ namespace ModelDto
     /// Przykład hierarchii:
     ///   Article (art_5)
     ///     └─ Paragraph (art_5__ust_1)
-    ///         └─ Point (art_5__ust_1__pkt_1)
-    ///             ├─ CommonPart Intro (art_5__ust_1__pkt_1__intro)
-    ///             ├─ Letter (art_5__ust_1__pkt_1__lit_a)
-    ///             │   ├─ CommonPart Intro (art_5__ust_1__pkt_1__lit_a__intro)
-    ///             │   ├─ Tiret (art_5__ust_1__pkt_1__lit_a__tir_1)
-    ///             │   │   ├─ CommonPart Intro (art_5__ust_1__pkt_1__lit_a__tir_1__intro)
-    ///             │   │   └─ CommonPart WrapUp (art_5__ust_1__pkt_1__lit_a__tir_1__wrapUp)
-    ///             │   └─ CommonPart WrapUp (art_5__ust_1__pkt_1__lit_a__wrapUp)
-    ///             └─ CommonPart WrapUp (art_5__ust_1__pkt_1__wrapUp)
+    ///         ├─ CommonPart Intro (art_5__ust_1__intro)
+    ///         ├─ Point (art_5__ust_1__pkt_1)
+    ///         │   ├─ CommonPart Intro (art_5__ust_1__pkt_1__intro)
+    ///         │   ├─ Letter (art_5__ust_1__pkt_1__lit_a)
+    ///         │   │   ├─ CommonPart Intro (art_5__ust_1__pkt_1__lit_a__intro)
+    ///         │   │   ├─ Tiret (art_5__ust_1__pkt_1__lit_a__tir_1)
+    ///         │   │   └─ CommonPart WrapUp (art_5__ust_1__pkt_1__lit_a__wrapUp)
+    ///         │   └─ CommonPart WrapUp (art_5__ust_1__pkt_1__wrapUp)
+    ///         └─ CommonPart WrapUp (art_5__ust_1__wrapUp)
     /// </summary>
     public class CommonPart : BaseEntity
     {

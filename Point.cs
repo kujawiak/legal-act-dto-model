@@ -8,28 +8,21 @@ namespace ModelDto
     /// <summary>
     /// Model punktu ustępu - zawiera definicję struktury bez logiki parsowania.
     /// Punkt może zawierać:
-    /// - CommonPart intro (wprowadzenie do wyliczenia liter)
+    /// - CommonParts (intro/wrapUp) na tym samym poziomie co litery
     /// - Litery lub tekst bezpośrednio
-    /// - CommonPart wrapUp (część wspólna po liście)
     /// </summary>
-    public class Point : BaseEntity
+    public class Point : BaseEntity, IHasCommonParts
     {
         /// <summary>
-        /// Część wspólna (wprowadzenie) przed listą liter.
-        /// Zazwyczaj zawiera tekst typu "gdzie:" lub "mianowicie:".
+        /// Części wspólne na poziomie punktu (np. intro/wrapUp wobec listy liter).
+        /// Występują jako rodzeństwo liter, nie jako ich element.
         /// </summary>
-        public CommonPart? CommonPartIntro { get; set; }
+        public List<CommonPart> CommonParts { get; set; } = new();
 
         /// <summary>
         /// Litery wchodzące w skład punktu.
         /// </summary>
         public List<Letter> Letters { get; set; } = new();
-
-        /// <summary>
-        /// Część wspólna (końcowa) po liście liter.
-        /// Zawiera tekst wspólny dla wszystkich wariantów.
-        /// </summary>
-        public CommonPart? CommonPartWrapUp { get; set; }
 
         public List<Amendment> Amendments { get; set; } = new();
 
