@@ -10,13 +10,19 @@ namespace ModelDto
     /// Paragraph zawiera co najmniej jeden punkt lub tekst bezpośrednio.
     /// Części wspólne dla listy punktów występują na tym samym poziomie co punkty.
     /// </summary>
-    public class Paragraph : BaseEntity, IHasCommonParts
+    public class Paragraph : BaseEntity, IHasCommonParts, IHasTextSegments
     {
         /// <summary>
         /// Części wspólne na poziomie ustępu (np. intro/wrapUp wobec listy punktów).
         /// Występują jako rodzeństwo punktów.
         /// </summary>
         public List<CommonPart> CommonParts { get; set; } = new();
+
+        /// <summary>
+        /// Segmenty tekstu (np. zdania) w obrębie ustępu.
+        /// Umożliwiają kotwiczenie nowelizacji do konkretnego zdania.
+        /// </summary>
+        public List<TextSegment> TextSegments { get; set; } = new();
 
         public List<Point> Points { get; set; } = new();
         public List<Amendment> Amendments { get; set; } = new();

@@ -10,8 +10,14 @@ namespace ModelDto
     /// Tiret to wyliczeniowa jednostka w hierarchii.
     /// Części wspólne występują jako rodzeństwo tiretów na poziomie litery.
     /// </summary>
-    public class Tiret : BaseEntity
+    public class Tiret : BaseEntity, IHasTextSegments
     {
+        /// <summary>
+        /// Segmenty tekstu (np. zdania) w obrębie tiretu.
+        /// Umożliwiają kotwiczenie nowelizacji do konkretnego zdania.
+        /// </summary>
+        public List<TextSegment> TextSegments { get; set; } = new();
+
         public List<Amendment> Amendments { get; set; } = new();
 
         public Tiret()

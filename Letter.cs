@@ -13,13 +13,19 @@ namespace ModelDto
     /// Numer litery przechowywany jest w EntityNumber (dziedziczony z BaseEntity),
     /// gdzie część liczbowa jest pusta, a wartość zawiera symbol litery (np. "a", "b", "aa" itp.).
     /// </summary>
-    public class Letter : BaseEntity, IHasCommonParts
+    public class Letter : BaseEntity, IHasCommonParts, IHasTextSegments
     {
         /// <summary>
         /// Części wspólne na poziomie litery (np. intro/wrapUp wobec listy tiretów).
         /// Występują jako rodzeństwo tiretów, nie jako ich element.
         /// </summary>
         public List<CommonPart> CommonParts { get; set; } = new();
+
+        /// <summary>
+        /// Segmenty tekstu (np. zdania) w obrębie litery.
+        /// Umożliwiają kotwiczenie nowelizacji do konkretnego zdania.
+        /// </summary>
+        public List<TextSegment> TextSegments { get; set; } = new();
 
         /// <summary>
         /// Tirety wchodzące w skład litery.

@@ -11,13 +11,19 @@ namespace ModelDto
     /// - CommonParts (intro/wrapUp) na tym samym poziomie co litery
     /// - Litery lub tekst bezpośrednio
     /// </summary>
-    public class Point : BaseEntity, IHasCommonParts
+    public class Point : BaseEntity, IHasCommonParts, IHasTextSegments
     {
         /// <summary>
         /// Części wspólne na poziomie punktu (np. intro/wrapUp wobec listy liter).
         /// Występują jako rodzeństwo liter, nie jako ich element.
         /// </summary>
         public List<CommonPart> CommonParts { get; set; } = new();
+
+        /// <summary>
+        /// Segmenty tekstu (np. zdania) w obrębie punktu.
+        /// Umożliwiają kotwiczenie nowelizacji do konkretnego zdania.
+        /// </summary>
+        public List<TextSegment> TextSegments { get; set; } = new();
 
         /// <summary>
         /// Litery wchodzące w skład punktu.
