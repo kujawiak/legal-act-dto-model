@@ -10,6 +10,10 @@ namespace ModelDto.SystematizingUnits
     /// 
     /// Przykłady: Część, Księga, Tytuł, Dział, Rozdział, Podrozdział.
     /// 
+    /// Uwaga: Rozdział (Chapter) jest OBLIGATORYJNY - każdy akt prawny zawiera co najmniej
+    /// jeden rozdział (domyślny/ukryty z IsImplicit=true, gdy nie występuje jawnie w tekście).
+    /// Pozostałe jednostki systematyzujące są opcjonalne.
+    /// 
     /// Każda jednostka systematyzująca ma:
     /// - Heading: krótki tytuł opisujący zakres tematyczny (np. "Przepisy ogólne", "Odpowiedzialność karna")
     /// - Number: numer jednostki (np. "I", "II", "1", "2")

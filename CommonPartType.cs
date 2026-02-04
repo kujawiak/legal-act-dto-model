@@ -13,13 +13,11 @@ namespace ModelDto
     {
         /// <summary>
         /// Wprowadzenie do wyliczenia - tekst przed listą (litery, tirety, itp.)
-        /// Przykład: "Gdzie:" (przed listą warunków)
         /// </summary>
         Intro,
 
         /// <summary>
         /// Część wspólna po wyliczeniu - tekst wspólny dla wszystkich wariantów
-        /// Przykład: "Szczegółowe warunki zawarte w rozporządzeniu" (po liście tiretów)
         /// </summary>
         WrapUp
     }
