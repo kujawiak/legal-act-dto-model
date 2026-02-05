@@ -19,6 +19,12 @@ namespace ModelDto
         Statute,
 
         /// <summary>
+        /// Projekt ustawy (forma legislacyjna)
+        /// - Struktura i nazewnictwo jak ustawa
+        /// </summary>
+        Bill,
+
+        /// <summary>
         /// Rozporządzenie (forma legislacyjna)
         /// - Artykuły oznaczane znakiem paragrafu "§"
         /// - Ustępy bez przedrostka, tylko numer kolejny
@@ -32,7 +38,19 @@ namespace ModelDto
         /// - Ustępy oznaczane znakiem paragrafu "§" i nazywane paragrafami
         /// Przykład: Art. 5 § 2 pkt 1
         /// </summary>
-        Code
+        Code,
+
+        /// <summary>
+        /// Ordynancja (forma legislacyjna)
+        /// - Struktura i nazewnictwo jak ustawa
+        /// </summary>
+        Ordinance,
+
+        /// <summary>
+        /// Ocena skutków regulacji (forma legislacyjna)
+        /// - Struktura i nazewnictwo do doprecyzowania
+        /// </summary>
+        RegulatoryImpactAssessment
     }
 
     /// <summary>
@@ -75,6 +93,9 @@ namespace ModelDto
                 LegalActType.Statute => "ustawa",
                 LegalActType.Regulation => "rozporządzenie",
                 LegalActType.Code => "kodeks",
+                LegalActType.Bill => "projekt ustawy",
+                LegalActType.Ordinance => "ordynancja",
+                LegalActType.RegulatoryImpactAssessment => "OSR ex post",
                 _ => "nieznany"
             };
     }
