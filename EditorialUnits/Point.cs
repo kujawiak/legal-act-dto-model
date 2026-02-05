@@ -1,32 +1,33 @@
 using System;
 using System.Collections.Generic;
+using ModelDto;
 
 #nullable enable
 
-namespace ModelDto
+namespace ModelDto.EditorialUnits
 {
     /// <summary>
-    /// Model punktu ustępu - zawiera definicję struktury bez logiki parsowania.
-    /// Punkt może zawierać:
+    /// Model punktu ustepu - zawiera definicje struktury bez logiki parsowania.
+    /// Punkt moze zawierac:
     /// - CommonParts (intro/wrapUp) na tym samym poziomie co litery
-    /// - Litery lub tekst bezpośrednio
+    /// - Litery lub tekst bezposrednio
     /// </summary>
     public class Point : BaseEntity, IHasCommonParts, IHasTextSegments
     {
         /// <summary>
-        /// Części wspólne na poziomie punktu (np. intro/wrapUp wobec listy liter).
-        /// Występują jako rodzeństwo liter, nie jako ich element.
+        /// Czesci wspolne na poziomie punktu (np. intro/wrapUp wobec listy liter).
+        /// Wystepuja jako rodzenstwo liter, nie jako ich element.
         /// </summary>
         public List<CommonPart> CommonParts { get; set; } = new();
 
         /// <summary>
-        /// Segmenty tekstu (np. zdania) w obrębie punktu.
-        /// Umożliwiają kotwiczenie nowelizacji do konkretnego zdania.
+        /// Segmenty tekstu (np. zdania) w obrebie punktu.
+        /// Umozliwiaja kotwiczenie nowelizacji do konkretnego zdania.
         /// </summary>
         public List<TextSegment> TextSegments { get; set; } = new();
 
         /// <summary>
-        /// Litery wchodzące w skład punktu.
+        /// Litery wchodzace w sklad punktu.
         /// </summary>
         public List<Letter> Letters { get; set; } = new();
 

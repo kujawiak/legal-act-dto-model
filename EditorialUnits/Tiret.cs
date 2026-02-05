@@ -1,20 +1,21 @@
 using System;
 using System.Collections.Generic;
+using ModelDto;
 
 #nullable enable
 
-namespace ModelDto
+namespace ModelDto.EditorialUnits
 {
     /// <summary>
-    /// Model tiret - zawiera definicję struktury bez logiki parsowania.
+    /// Model tiret - zawiera definicje struktury bez logiki parsowania.
     /// Tiret to wyliczeniowa jednostka w hierarchii.
-    /// Części wspólne występują jako rodzeństwo tiretów na poziomie litery.
+    /// Czesci wspolne wystepuja jako rodzenstwo tiretow na poziomie litery.
     /// </summary>
     public class Tiret : BaseEntity, IHasTextSegments
     {
         /// <summary>
-        /// Segmenty tekstu (np. zdania) w obrębie tiretu.
-        /// Umożliwiają kotwiczenie nowelizacji do konkretnego zdania.
+        /// Segmenty tekstu (np. zdania) w obrebie tiretu.
+        /// Umozliwiaja kotwiczenie nowelizacji do konkretnego zdania.
         /// </summary>
         public List<TextSegment> TextSegments { get; set; } = new();
 

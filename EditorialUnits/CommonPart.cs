@@ -1,30 +1,31 @@
 using System;
+using ModelDto;
 
 #nullable enable
 
-namespace ModelDto
+namespace ModelDto.EditorialUnits
 {
     /// <summary>
-    /// Część wspólna (intro/wrapUp) - wirtualna jednostka redakcyjna reprezentująca
-    /// tekst występujący przed listą elementów wyliczeniowych lub po niej.
+    /// Czesc wspolna (intro/wrapUp) - wirtualna jednostka redakcyjna reprezentujaca
+    /// tekst wystepujacy przed lista elementow wyliczeniowych lub po niej.
     /// 
     /// CommonPart jest na tym samym poziomie hierarchii co elementy wyliczeniowe,
-    /// których dotyczy (np. rodzeństwo punktów, liter, tiretów).
+    /// ktorych dotyczy (np. rodzenstwo punktow, liter, tiretow).
     /// 
-    /// Typowe poziomy występowania:
-    /// - Paragraph: CommonParts (wobec listy punktów)
+    /// Typowe poziomy wystepowania:
+    /// - Paragraph: CommonParts (wobec listy punktow)
     /// - Point: CommonParts (wobec listy liter)
-    /// - Letter: CommonParts (wobec listy tiretów)
+    /// - Letter: CommonParts (wobec listy tiretow)
     /// 
-    /// CommonPart NIE występuje w Article jako bezpośrednie dziecko.
+    /// CommonPart NIE wystepuje w Article jako bezposrednie dziecko.
     /// 
-    /// Nie jest jednostką prawa w tradycyjnym sensie, lecz adresowalnym fragmentem
+    /// Nie jest jednostka prawa w tradycyjnym sensie, lecz adresowalnym fragmentem
     /// w systemie redakcyjnym i w modelu zmian legislacyjnych.
     /// 
-    /// W publikacyjnym XML (AKN/ELI) CommonPart nie pojawia się jawnie - jego zawartość
-    /// trafia bezpośrednio do elementów intro lub wrapUp.
+    /// W publikacyjnym XML (AKN/ELI) CommonPart nie pojawia sie jawnie - jego zawartosc
+    /// trafia bezposrednio do elementow intro lub wrapUp.
     /// 
-    /// Przykład hierarchii:
+    /// Przyklad hierarchii:
     ///   Article (art_5)
     ///     └─ Paragraph (art_5__ust_1)
     ///         ├─ CommonPart Intro (art_5__ust_1__intro)
@@ -40,19 +41,19 @@ namespace ModelDto
     public class CommonPart : BaseEntity
     {
         /// <summary>
-        /// Typ części wspólnej: Intro (przed listą) lub WrapUp (po liście).
+        /// Typ czesci wspolnej: Intro (przed lista) lub WrapUp (po liscie).
         /// </summary>
         public CommonPartType Type { get; set; } = CommonPartType.Intro;
 
         /// <summary>
-        /// Hierarchiczny identyfikator jednostki nadrzędnej (np. "art_5__ust_1").
-        /// Służy do precyzyjnego odwołania w systemie zmian legislacyjnych.
+        /// Hierarchiczny identyfikator jednostki nadrzednej (np. "art_5__ust_1").
+        /// Sluzy do precyzyjnego odwolania w systemie zmian legislacyjnych.
         /// </summary>
         public string ParentEId { get; set; } = string.Empty;
 
         /// <summary>
-        /// Opcjonalne powiązanie z segmentem tekstu (np. zdaniem) w jednostce nadrzędnej.
-        /// Pozwala wskazać, które zdanie pełni rolę intro/wrapUp.
+        /// Opcjonalne powiazanie z segmentem tekstu (np. zdaniem) w jednostce nadrzednej.
+        /// Pozwala wskazac, ktore zdanie pelni role intro/wrapUp.
         /// </summary>
         public int? SourceSegmentOrder { get; set; }
 
@@ -75,7 +76,7 @@ namespace ModelDto
         }
 
         /// <summary>
-        /// Zwraca segment ID dla części wspólnej (np. "intro" lub "wrapUp").
+        /// Zwraca segment ID dla czesci wspolnej (np. "intro" lub "wrapUp").
         /// Nie dodaje przedrostka numerycznego - CommonPart nie ma numeru.
         /// </summary>
         protected override string GetLocalIdSegment()
@@ -84,7 +85,7 @@ namespace ModelDto
         }
 
         /// <summary>
-        /// Właściwość wyświetlająca typ części wspólnej do celów UI.
+        /// Wlasciwosc wyswietlajaca typ czesci wspolnej do celow UI.
         /// </summary>
         public string TypeDisplayLabel => Type.ToFriendlyString();
 

@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using ModelDto;
 
-namespace ModelDto
+namespace ModelDto.EditorialUnits
 {
     /// <summary>
-    /// Model artykułu ustawy - zawiera definicję struktury bez logiki.
-    /// Artykuł zawiera co najmniej jeden ustęp.
+    /// Model artykulu ustawy - zawiera definicje struktury bez logiki.
+    /// Artykul zawiera co najmniej jeden ustep.
     /// </summary>
     public class Article : BaseEntity
     {

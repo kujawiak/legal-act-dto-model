@@ -1,26 +1,27 @@
 using System;
 using System.Collections.Generic;
+using ModelDto;
 
 #nullable enable
 
-namespace ModelDto
+namespace ModelDto.EditorialUnits
 {
     /// <summary>
-    /// Model ustępu artykułu (Paragraph) - definicja struktury bez logiki parsowania.
-    /// Paragraph zawiera co najmniej jeden punkt lub tekst bezpośrednio.
-    /// Części wspólne dla listy punktów występują na tym samym poziomie co punkty.
+    /// Model ustepu artykulu (Paragraph) - definicja struktury bez logiki parsowania.
+    /// Paragraph zawiera co najmniej jeden punkt lub tekst bezposrednio.
+    /// Czesci wspolne dla listy punktow wystepuja na tym samym poziomie co punkty.
     /// </summary>
     public class Paragraph : BaseEntity, IHasCommonParts, IHasTextSegments
     {
         /// <summary>
-        /// Części wspólne na poziomie ustępu (np. intro/wrapUp wobec listy punktów).
-        /// Występują jako rodzeństwo punktów.
+        /// Czesci wspolne na poziomie ustepu (np. intro/wrapUp wobec listy punktow).
+        /// Wystepuja jako rodzenstwo punktow.
         /// </summary>
         public List<CommonPart> CommonParts { get; set; } = new();
 
         /// <summary>
-        /// Segmenty tekstu (np. zdania) w obrębie ustępu.
-        /// Umożliwiają kotwiczenie nowelizacji do konkretnego zdania.
+        /// Segmenty tekstu (np. zdania) w obrebie ustepu.
+        /// Umozliwiaja kotwiczenie nowelizacji do konkretnego zdania.
         /// </summary>
         public List<TextSegment> TextSegments { get; set; } = new();
 
@@ -28,7 +29,7 @@ namespace ModelDto
         public List<Amendment> Amendments { get; set; } = new();
 
         /// <summary>
-        /// Role może określać specjalne mapowania/nazewnictwo (np. "prg" dla paragrafu w kodeksie).
+        /// Role moze okreslac specjalne mapowania/nazewnictwo (np. "prg" dla paragrafu w kodeksie).
         /// </summary>
         public string? Role { get; set; }
 
