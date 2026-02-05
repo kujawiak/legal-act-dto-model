@@ -7,8 +7,19 @@ namespace ModelDto
     /// </summary>
     public class JournalInfo
     {
+        /// <summary>
+        /// Rok wydania dziennika.
+        /// </summary>
         public int Year { get; set; }
+
+        /// <summary>
+        /// Numery pozycji publikatora.
+        /// </summary>
         public List<int> Positions { get; set; } = new();
+
+        /// <summary>
+        /// Fragment źródłowy opisu dziennika (np. "Dz.U. z 2020 r. poz. 1234 i 5678").
+        /// </summary>
         public string SourceString { get; set; } = string.Empty;
 
         public override string ToString()

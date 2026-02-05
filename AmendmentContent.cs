@@ -10,6 +10,7 @@ namespace ModelDto
     {
         /// <summary>
         /// Typ obiektu będącego treścią nowelizacji (Artykuł, Ustęp, Punkt, Litera, Tiret, CommonPart).
+        /// Możliwa redundancja z StructuralAmendmentReference. Do weryfikacji, czy potrzebna.
         /// </summary>
         public AmendmentObjectType ObjectType { get; set; }
 
