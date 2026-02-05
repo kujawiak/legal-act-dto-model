@@ -3,7 +3,7 @@ namespace ModelDto
     public enum AmendmentObjectType
     {
         Article,
-        Subsection,
+        Paragraph,
         Point,
         Letter,
         Tiret,
@@ -18,11 +18,11 @@ namespace ModelDto
             return type switch
             {
                 AmendmentObjectType.Article => "artykul",
-                AmendmentObjectType.Subsection => "ustep",
+                AmendmentObjectType.Paragraph => "ustep",
                 AmendmentObjectType.Point => "punkt",
                 AmendmentObjectType.Letter => "litera",
                 AmendmentObjectType.Tiret => "tiret",
-                AmendmentObjectType.CommonPart => "czesc_wspólna",
+                AmendmentObjectType.CommonPart => "czesc_wspolna",
                 _ => "none"
             };
         }
@@ -32,7 +32,7 @@ namespace ModelDto
             return type switch
             {
                 AmendmentObjectType.Article => "ART",
-                AmendmentObjectType.Subsection => "UST",
+                AmendmentObjectType.Paragraph => "UST",
                 AmendmentObjectType.Point => "PKT",
                 AmendmentObjectType.Letter => "LIT",
                 AmendmentObjectType.Tiret => "TIR",
