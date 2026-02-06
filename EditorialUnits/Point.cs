@@ -43,9 +43,9 @@ namespace ModelDto.EditorialUnits
 
         public override string ToString()
         {
-            const string indent = "    ";
+            const string indent = "      ";
             var builder = new StringBuilder();
-            builder.Append($"{indent}[{Id}] {ContentText.Substring(0, Math.Min(24, ContentText.Length))}");
+            builder.Append($"{indent}[{Id}] {ContentText.Substring(0, Math.Min(48, ContentText.Length))}");
 
             foreach (var letter in Letters)
             {
