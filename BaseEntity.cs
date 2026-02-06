@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using ModelDto.EditorialUnits;
+using ModelDto.SystematizingUnits;
 
 #nullable enable
 
@@ -121,6 +122,11 @@ namespace ModelDto
                 BaseEntity? current = this;
                 while (current != null)
                 {
+                    if (current is ISystematizingUnit systematizingUnit && systematizingUnit.IsImplicit)
+                    {
+                        current = current.Parent;
+                        continue;
+                    }
                     var seg = current.GetLocalIdSegment();
                     if (!string.IsNullOrEmpty(seg)) parts.Add(seg);
                     current = current.Parent;
