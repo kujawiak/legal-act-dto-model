@@ -14,6 +14,11 @@ namespace ModelDto.EditorialUnits
     public class Paragraph : BaseEntity, IHasCommonParts, IHasTextSegments, IHasAmendments
     {
         /// <summary>
+        /// Oznacza ustep niejawny (tworzony na podstawie reguly, bez jawnego oznaczenia w tekscie).
+        /// </summary>
+        public bool IsImplicit { get; set; }
+
+        /// <summary>
         /// Czesci wspolne na poziomie ustepu (np. intro/wrapUp wobec listy punktow).
         /// Wystepuja jako rodzenstwo punktow.
         /// </summary>
@@ -38,6 +43,16 @@ namespace ModelDto.EditorialUnits
             UnitType = UnitType.Paragraph;
             EIdPrefix = "ust";
             DisplayLabel = "ust.";
+        }
+
+        protected override string GetLocalIdSegment()
+        {
+            if (IsImplicit)
+            {
+                return string.Empty;
+            }
+
+            return base.GetLocalIdSegment();
         }
 
         public override string ToString()
