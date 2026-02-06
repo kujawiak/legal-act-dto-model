@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using ModelDto.EditorialUnits;
 using ModelDto.SystematizingUnits;
 
@@ -116,7 +117,16 @@ namespace ModelDto
 
         public override string ToString()
         {
-            return $"{Type.ToFriendlyString().ToUpper()}: {Title} ({SourceJournal})";
+            var builder = new StringBuilder();
+            builder.Append($"{Type.ToFriendlyString().ToUpper()}: {Title} ({SourceJournal})");
+
+            foreach (var article in Articles)
+            {
+                builder.AppendLine();
+                builder.Append(article.ToString());
+            }
+
+            return builder.ToString();
         }
 
         private static IEnumerable<Article> EnumerateArticlesFromUnit(ISystematizingUnit unit)

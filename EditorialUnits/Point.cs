@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using ModelDto;
 
 #nullable enable
@@ -12,7 +13,7 @@ namespace ModelDto.EditorialUnits
     /// - CommonParts (intro/wrapUp) na tym samym poziomie co litery
     /// - Litery lub tekst bezposrednio
     /// </summary>
-    public class Point : BaseEntity, IHasCommonParts, IHasTextSegments
+    public class Point : BaseEntity, IHasCommonParts, IHasTextSegments, IHasAmendments
     {
         /// <summary>
         /// Czesci wspolne na poziomie punktu (np. intro/wrapUp wobec listy liter).
@@ -38,6 +39,25 @@ namespace ModelDto.EditorialUnits
             UnitType = UnitType.Point;
             EIdPrefix = "pkt";
             DisplayLabel = "pkt";
+        }
+
+        public override string ToString()
+        {
+            const string indent = "    ";
+            var builder = new StringBuilder();
+            builder.Append($"{indent}[{Id}] {ContentText.Substring(0, Math.Min(24, ContentText.Length))}");
+
+            foreach (var letter in Letters)
+            {
+                builder.AppendLine();
+                var letterStr = letter.ToString();
+                if (letterStr != null)
+                {
+                    builder.Append(letterStr);
+                }
+            }
+
+            return builder.ToString();
         }
     }
 }

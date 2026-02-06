@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using ModelDto;
+using System.Text;
 
 #nullable enable
 
@@ -11,7 +11,7 @@ namespace ModelDto.EditorialUnits
     /// Paragraph zawiera co najmniej jeden punkt lub tekst bezposrednio.
     /// Czesci wspolne dla listy punktow wystepuja na tym samym poziomie co punkty.
     /// </summary>
-    public class Paragraph : BaseEntity, IHasCommonParts, IHasTextSegments
+    public class Paragraph : BaseEntity, IHasCommonParts, IHasTextSegments, IHasAmendments
     {
         /// <summary>
         /// Czesci wspolne na poziomie ustepu (np. intro/wrapUp wobec listy punktow).
@@ -38,6 +38,25 @@ namespace ModelDto.EditorialUnits
             UnitType = UnitType.Paragraph;
             EIdPrefix = "ust";
             DisplayLabel = "ust.";
+        }
+
+        public override string ToString()
+        {
+            const string indent = "    ";
+            var builder = new StringBuilder();
+            builder.Append($"{indent}[{Id}] {ContentText.Substring(0, Math.Min(24, ContentText.Length))}");
+
+            foreach (var point in Points)
+            {
+                builder.AppendLine();
+                var pointStr = point.ToString();
+                if (pointStr != null)
+                {
+                    builder.Append(pointStr);
+                }
+            }
+
+            return builder.ToString();
         }
     }
 }

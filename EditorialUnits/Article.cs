@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using ModelDto;
 
 namespace ModelDto.EditorialUnits
@@ -20,6 +21,21 @@ namespace ModelDto.EditorialUnits
             UnitType = UnitType.Article;
             EIdPrefix = "art";
             DisplayLabel = "art.";
+        }
+
+        public override string ToString()
+        {
+            const string indent = "  ";
+            var builder = new StringBuilder();
+            builder.Append($"{indent}[{Id}]");
+
+            foreach (var paragraph in Paragraphs)
+            {
+                builder.AppendLine();
+                builder.Append(paragraph.ToString());
+            }
+
+            return builder.ToString();
         }
     }
 }
