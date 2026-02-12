@@ -32,13 +32,13 @@ namespace ModelDto
 
             // Jednostka redakcyjna
             var s = Structure;
-            if (s.Article   != null) parts.Add($"art. {s.Article}");
-            if (s.Paragraph != null) parts.Add($"ust. {s.Paragraph}");
-            if (s.Point     != null) parts.Add($"pkt {s.Point}");
-            if (s.Letter    != null) parts.Add($"lit. {s.Letter}");
-            if (s.Tiret     != null) parts.Add($"tiret {s.Tiret}");
+            if (s.Article   != null) parts.Add($"art_{s.Article}");
+            if (s.Paragraph != null) parts.Add($"ust_{s.Paragraph}");
+            if (s.Point     != null) parts.Add($"pkt_{s.Point}");
+            if (s.Letter    != null) parts.Add($"lit_{s.Letter}");
+            if (s.Tiret     != null) parts.Add($"tiret_{s.Tiret}");
 
-            return string.Join(" | ", parts);
+            return string.Join("__", parts);
         }
     }
 
