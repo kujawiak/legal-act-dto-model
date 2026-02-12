@@ -24,7 +24,7 @@ namespace ModelDto.EditorialUnits
         /// Tirety wchodzace w skład tiret. Podwójne tirety.
         /// </summary>
         public List<Tiret> Tirets { get; set; } = new();
-        public List<Amendment> Amendments { get; set; } = new();
+        public Amendment? Amendment { get; set; }
 
         public Tiret()
         {

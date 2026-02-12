@@ -34,7 +34,7 @@ namespace ModelDto.EditorialUnits
         /// </summary>
         public List<Tiret> Tirets { get; set; } = new();
 
-        public List<Amendment> Amendments { get; set; } = new();
+        public Amendment? Amendment { get; set; }
 
         public Letter()
         {

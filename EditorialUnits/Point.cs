@@ -32,7 +32,7 @@ namespace ModelDto.EditorialUnits
         /// </summary>
         public List<Letter> Letters { get; set; } = new();
 
-        public List<Amendment> Amendments { get; set; } = new();
+        public Amendment? Amendment { get; set; }
 
         public Point()
         {

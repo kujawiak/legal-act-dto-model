@@ -1,7 +1,5 @@
 #nullable enable
 
-using System.Collections.Generic;
-
 namespace ModelDto
 {
     /// <summary>
@@ -10,8 +8,9 @@ namespace ModelDto
     public interface IHasAmendments
     {
         /// <summary>
-        /// Lista nowelizacji przypisanych do jednostki.
+        /// Nowelizacja przypisana do jednostki (0 lub 1).
+        /// Jedna jednostka redakcyjna może być właścicielem co najwyżej jednej nowelizacji.
         /// </summary>
-        List<Amendment> Amendments { get; set; }
+        Amendment? Amendment { get; set; }
     }
 }

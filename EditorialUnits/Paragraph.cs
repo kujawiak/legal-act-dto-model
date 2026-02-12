@@ -31,7 +31,7 @@ namespace ModelDto.EditorialUnits
         public List<TextSegment> TextSegments { get; set; } = new();
 
         public List<Point> Points { get; set; } = new();
-        public List<Amendment> Amendments { get; set; } = new();
+        public Amendment? Amendment { get; set; }
 
         /// <summary>
         /// Role moze okreslac specjalne mapowania/nazewnictwo (np. "prg" dla paragrafu w kodeksie).
