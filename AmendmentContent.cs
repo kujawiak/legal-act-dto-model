@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using ModelDto.EditorialUnits;
 
+#nullable enable
+
 namespace ModelDto
 {
     /// <summary>
